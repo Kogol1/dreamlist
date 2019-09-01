@@ -11,8 +11,8 @@ class DreamsController extends Controller
 {
     public function index(Request $request)
     {
-        $dreams = Dream::orderBy('id','desc')->where('done', NULL)->get();
-        $dreams2 = Dream::orderBy('done','desc')->where('done', '!=', NULL)->get();
+        $dreams = Dream::orderBy('id','asc')->where('done', NULL)->get();
+        $dreams2 = Dream::orderBy('done','asc')->where('done', '!=', NULL)->get();
         return view('index')->with('dreams', $dreams)->with('dreams2', $dreams2);
     }
 
