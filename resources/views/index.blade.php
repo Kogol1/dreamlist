@@ -63,7 +63,7 @@
 
                     @foreach($dreams2 as $dream2)
                     <tr>
-                      <td><a href="/update/{{$dream2->id}}"><i class="far fa-check-square"></i></td>
+                      <td><a href="/update/{{$dream2->id}}"><i class="fas fa-check-square"></i></td>
                       <td>{{$dream2->title}} </td>
                       <td><a href="/destroy/{{$dream2->id}}"><span class="fas fa-trash-alt"></span></td>
                     </tr>
