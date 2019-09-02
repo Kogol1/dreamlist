@@ -25,8 +25,30 @@
     <div id="app">
 
 
-        <main class="py-4">
+        <main class="py-4">       
+                 <div class="w3-row">
+                <div class="w3-col m4 l4">
+                  &nbsp;
+                </div>
+                <div class="w3-col s12 m4 l4">
+        
+                  <div class="w3-container w3-teal w3-center">
+                      <center>
+                    <h1>My Dream List</h1>
+                    <div class="w3-cell-row">
+                            <div class="w3-container w3-cell w3-right-align">
+                    <a href="/"><h4>Dream List</h4></a>
+                            </div>
+                    <div class="w3-container w3-cell">
+                    <a href="/stats"><h4>Statistiky</h4></a>
+                    </div>
+                    </div>
+                        </center>
+                  </div><br><br>
             @yield('content')
+
+
+
         </main>
     </div>
 </body>

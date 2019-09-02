@@ -2,17 +2,6 @@
 
 @section('content')
 
-<div class="w3-row">
-        <div class="w3-col m4 l4">
-          &nbsp;
-        </div>
-        <div class="w3-col s12 m4 l4">
-
-          <div class="w3-container w3-teal text-center">
-              <center>
-            <h1 class="">My Dream List</h1>
-                </center>
-          </div><br><br>
 
         </div>
         <div class="w3-col s0 m4 l4">
@@ -65,6 +54,7 @@
                     <tr>
                       <td><a href="/update/{{$dream2->id}}"><i class="fas fa-check-square"></i></td>
                       <td>{{$dream2->title}} </td>
+                      <td>{{ \Carbon\Carbon::parse($dream2->done)->format('d. m. Y')}}</td>
                       <td><a href="/destroy/{{$dream2->id}}"><span class="fas fa-trash-alt"></span></td>
                     </tr>
                     @endforeach
