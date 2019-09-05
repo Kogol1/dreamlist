@@ -48,4 +48,11 @@ class DreamsController extends Controller
         $dream->delete();
         return redirect('/');
     }
+
+    public function stats(Request $request)
+    {
+        $dreams = Dream::orderBy('id','asc')->where('done', NULL)->get();
+        $dreams2 = Dream::orderBy('done','asc')->where('done', '!=', NULL)->get();
+        return view('stats')->with('dreams', $dreams)->with('dreams2', $dreams2);
+    }
 }

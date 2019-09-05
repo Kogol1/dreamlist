@@ -2,27 +2,10 @@
 
 @section('content')
 
+<div class="container text-center mt-4">
+    <center>
+    </center>
+    </div>
 
-
-        </div>
-        <div class="w3-col s0 m4 l4">
-              &nbsp;
-        </div>
-      </div>
-      
-      <div class="w3-row">
-          <div class="w3-col s1 m4 l4">
-            &nbsp;
-          </div>
-          <div class="w3-col s10 m4 l4">
-  
-
-
-
-        </div>
-        <div class="w3-col s1 m4 l4">
-          &nbsp;
-        </div>
-      </div>
 
 @endsection

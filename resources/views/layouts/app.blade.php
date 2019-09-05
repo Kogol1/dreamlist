@@ -17,39 +17,35 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/138baeb1f9.js"></script>
-    
 </head>
 <body>
     <div id="app">
-
-
-        <main class="py-4">       
-                 <div class="w3-row">
-                <div class="w3-col m4 l4">
-                  &nbsp;
-                </div>
-                <div class="w3-col s12 m4 l4">
-        
-                  <div class="w3-container w3-teal w3-center">
-                      <center>
-                    <h1>My Dream List</h1>
-                    <div class="w3-cell-row">
-                            <div class="w3-container w3-cell w3-right-align">
-                    <a href="/"><h4>Dream List</h4></a>
-                            </div>
-                    <div class="w3-container w3-cell">
-                    <a href="/stats"><h4>Statistiky</h4></a>
-                    </div>
-                    </div>
-                        </center>
-                  </div><br><br>
-            @yield('content')
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #009688;">
+            <div class="container">
+            <a class="navbar-brand" href="#">Dream List</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="{{action('DreamsController@index')}}"><i class="fas fa-angle-right"></i> Dreams <i class="fas fa-rocket"></i></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="{{action('DreamsController@stats')}}"><i class="fas fa-angle-right"></i> Stats <i class="fas fa-chart-pie"></i></a>
+                </li>
+            </div>
+            </div>
+          </nav>
+        @yield('content')
 
 
 
-        </main>
+
     </div>
 </body>
 </html>
