@@ -6,7 +6,5 @@ Route::get('/destroy/{id}', 'DreamsController@destroy')->middleware('auth');
 
 Route::get('/stats', 'DreamsController@stats')->middleware('auth');
 
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
