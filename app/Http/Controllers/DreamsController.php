@@ -55,11 +55,26 @@ class DreamsController extends Controller
 
     public function stats(Request $request)
     {
+        $doneCount = Dream::where('done', '!=', NULL)->count();
+        $notDoneCount = Dream::where('done', null)->count();
+
+        $dreams = Dream::all();
+
+        $dreamMonths = $dreams->groupBy('month');
+        foreach ($dreamMonths as $month => $items){
+            $array = [
+                $month => [
+                    'count' => $items->where('done')->count(),
+                    'count1' => $items->where('done')->count(),
+                ],
+            ];
+        }
+
+
         return view('stats')
-            ->with('kd_ratio', number_format((Dream::where('done', '!=', NULL)->count()) / (Dream::where('done', NULL)->count()),2,'.',' '))
-            ->with('done', Dream::where('done', '!=', NULL)->count())
-            ->with('not_done', Dream::where('done', NULL)->count());
-
-
+            ->with('kd_ratio', number_format(($dreams->where('done')->count()) / ($notDoneCount),2,'.',' '))
+            ->with('done', $doneCount)
+            ->with('not_done', $notDoneCount);
     }
+
 }

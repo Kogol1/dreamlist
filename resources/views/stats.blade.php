@@ -26,7 +26,7 @@
                 <td>{{$kd_ratio}}</td>
             </tr>
         </table>
-        <div id="kd_ratio" style="width: 100%; min-height:450px;"></div>
+        <div id="piechart"></div>
 
     </div>
 
@@ -48,14 +48,13 @@
             var options = {
                 title: 'Poměr splněných/nesplněných snů',
                 pieHole: 0.6,
+                width: '100%',
+                height: '500px'
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('kd_ratio'));
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
-        $(window).resize(function(){
-            drawChart();
-        });
     </script>
 
 @endsection
