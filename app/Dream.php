@@ -4,10 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Dream extends Model
 {
+    use SoftDeletes;
+
 
     protected $fillable = [
         'title'
@@ -19,6 +21,6 @@ class Dream extends Model
 
     public function getMonthAttribute()
     {
-        return Carbon::parse($this->attributes['done'])->format('m');
+        return Carbon::parse($this->done)->format('m');
     }
 }

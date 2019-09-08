@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class DreamsController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         $dreams = Dream::orderBy('id', 'asc')->where('done', NULL)->get();
         $dreams2 = Dream::orderBy('done', 'asc')->where('done', '!=', NULL)->get();
@@ -53,28 +53,62 @@ class DreamsController extends Controller
         return redirect('/');
     }
 
-    public function stats(Request $request)
+    public function stats()
     {
         $doneCount = Dream::where('done', '!=', NULL)->count();
-        $notDoneCount = Dream::where('done', null)->count();
+        $notDoneCount = Dream::where('done', NULL)->count();
+        $deleteCount = Dream::onlyTrashed()->count();
 
         $dreams = Dream::all();
 
-        $dreamMonths = $dreams->groupBy('month');
-        foreach ($dreamMonths as $month => $items){
-            $array = [
-                $month => [
-                    'count' => $items->where('done')->count(),
-                    'count1' => $items->where('done')->count(),
-                ],
-            ];
+        //Dream done by month
+        $dreams_done_by_month = Dream::select('id', 'done')->where('done', '!=', NULL)->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->done)->format('m'); // grouping by months
+            });
+        $dreams_done_by_month_ammount = [];
+        $dreams_done_by_month_ammount_array = [];
+        foreach ($dreams_done_by_month as $key => $value) {
+            $dreams_done_by_month_ammount[(int)$key] = count($value);
         }
-
-
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($dreams_done_by_month_ammount[$i])) {
+                $dreams_done_by_month_ammount_array[$i] = $dreams_done_by_month_ammount[$i];
+            } else {
+                $dreams_done_by_month_ammount_array[$i] = 0;
+            }
+        }
+        //Dream create by month
+        $dreams_create_by_month = Dream::select('id', 'created_at')->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->done)->format('m'); // grouping by months
+            });
+        $dreams_create_by_month_ammount = [];
+        $dreams_create_by_month_ammount_array = [];
+        foreach ($dreams_create_by_month as $key => $value) {
+            $dreams_create_by_month_ammount[(int)$key] = count($value);
+        }
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($dreams_create_by_month_ammount[$i])) {
+                $dreams_create_by_month_ammount_array[$i] = $dreams_create_by_month_ammount[$i];
+            } else {
+                $dreams_create_by_month_ammount_array[$i] = 0;
+            }
+        }
+        $a = array ('done', 'create');
+        $e = array_combine($a, array($dreams_done_by_month_ammount_array,$dreams_create_by_month_ammount_array) );
+        //dd($e);
         return view('stats')
-            ->with('kd_ratio', number_format(($dreams->where('done')->count()) / ($notDoneCount),2,'.',' '))
+            ->with('kd_ratio', number_format(($dreams->where('done')->count()) / ($notDoneCount), 2, '.', ' '))
             ->with('done', $doneCount)
-            ->with('not_done', $notDoneCount);
-    }
+            ->with('not_done', $notDoneCount)
+            ->with('deleted', $deleteCount)
+            ->with('dreams_done_by_month_ammount_array', $dreams_done_by_month_ammount_array)
+            ->with('dreams_create_by_month_ammount_array', $dreams_create_by_month_ammount_array);
+            //->with('e', $e);
+
+
+
+  }
 
 }
