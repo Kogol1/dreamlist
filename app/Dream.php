@@ -23,4 +23,14 @@ class Dream extends Model
     {
         return Carbon::parse($this->done)->format('m');
     }
+    public function  getDeltaAttribute()
+    {
+        if($this->done != null){
+            $start = Carbon::parse($this->created_at);
+            $end = Carbon::parse($this->done);
+            $delta =$end->diffInHours($start);
+            return $delta;
+        }
+    }
+
 }

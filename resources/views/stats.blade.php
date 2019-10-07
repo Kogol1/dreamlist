@@ -25,6 +25,7 @@
                 <th>Ration of accomplished/ not yet accomplished</th>
                 <td>{{$kd_ratio}}</td>
             </tr>
+
         </table>
         <div id="piechart"></div>
 
@@ -75,9 +76,19 @@
         </table>
 
 
+
     </div>
 </div>
-        <div id="chart_div"></div>
+        <table class="table table-dark table-sm table-striped table-bordered mt-4">
+            <tr>
+                <th>Average time (in days) from dream creation to its fulfilment</th>
+                <td>{{$average}} days</td>
+            </tr>
+            <tr>
+                <th>Oldest unfulfiled dream + time from creation</th>
+                <td>{{$oldestUndone->title}} | {{$oldestUndone_difference}}</td>
+            </tr>
+        </table>
     </div>
 
     <script type="text/javascript">

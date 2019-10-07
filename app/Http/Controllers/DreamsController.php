@@ -95,20 +95,35 @@ class DreamsController extends Controller
                 $dreams_create_by_month_ammount_array[$i] = 0;
             }
         }
-        $a = array ('done', 'create');
-        $e = array_combine($a, array($dreams_done_by_month_ammount_array,$dreams_create_by_month_ammount_array) );
-        //dd($e);
+        //Average time (in days) from dream creation to its fulfilment
+        $average = 0;
+        $i = 0;
+        $doneDreams = Dream::where('done', '!=', NULL)->get();
+        foreach ($doneDreams as $dream) {
+            $average = +$dream->delta;
+            $i++;
+        }
+        $average = number_format((($average / $i) / 24), 2, '.', ' ');
+        $oldestUndone = Dream::orderBy('created_at', 'asc')->where('done', null)->first();
+        $created = new Carbon($oldestUndone->created_at);
+        $now = Carbon::now();
+        $oldestUndone_difference = ($created->diff($now)->days < 1)
+            ? 'today'
+            : $created->diffForHumans($now);
+        
         return view('stats')
             ->with('kd_ratio', number_format(($dreams->where('done')->count()) / ($notDoneCount), 2, '.', ' '))
             ->with('done', $doneCount)
             ->with('not_done', $notDoneCount)
             ->with('deleted', $deleteCount)
             ->with('dreams_done_by_month_ammount_array', $dreams_done_by_month_ammount_array)
-            ->with('dreams_create_by_month_ammount_array', $dreams_create_by_month_ammount_array);
-            //->with('e', $e);
+            ->with('dreams_create_by_month_ammount_array', $dreams_create_by_month_ammount_array)
+            ->with('average', $average)
+            ->with('oldestUndone', $oldestUndone)->with('oldestUndone_difference', $oldestUndone_difference)
+
+            ;
 
 
-
-  }
+    }
 
 }
