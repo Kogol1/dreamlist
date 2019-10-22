@@ -88,6 +88,14 @@
                 <th>Oldest unfulfiled dream + time from creation</th>
                 <td>{{$oldestUndone->title}} | {{$oldestUndone_difference}}</td>
             </tr>
+            <tr>
+                <th>The fastest dream come true + time from creation to its fulfilment</th>
+                <td>{{$fastestDream->title}} | {{$fastestDream->delta_time}} hours</td>
+            </tr>
+            <tr>
+                <th>The slowest dream come true + time from creation to its fulfilment</th>
+                <td>{{$slowestDream->title}} | {{$slowestDreamTime}}</td>
+            </tr>
         </table>
     </div>
 

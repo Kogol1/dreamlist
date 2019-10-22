@@ -14,6 +14,10 @@ class Dream extends Model
     protected $fillable = [
         'title'
     ];
+    protected $appends = [
+        'delta_time',
+        'month'
+    ];
     //Primary key
       public $primaryKey = 'id';
     //Timestamps
@@ -23,14 +27,13 @@ class Dream extends Model
     {
         return Carbon::parse($this->done)->format('m');
     }
-    public function  getDeltaAttribute()
+    public function  getDeltaTimeAttribute()
     {
-        if($this->done != null){
             $start = Carbon::parse($this->created_at);
             $end = Carbon::parse($this->done);
-            $delta =$end->diffInHours($start);
+            $delta = $end->diffInHours($start);
             return $delta;
-        }
     }
+
 
 }

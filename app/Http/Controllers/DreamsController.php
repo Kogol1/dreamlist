@@ -100,7 +100,7 @@ class DreamsController extends Controller
         $i = 0;
         $doneDreams = Dream::where('done', '!=', NULL)->get();
         foreach ($doneDreams as $dream) {
-            $average = +$dream->delta;
+            $average = +$dream->delta_time;
             $i++;
         }
         $average = number_format((($average / $i) / 24), 2, '.', ' ');
@@ -110,7 +110,23 @@ class DreamsController extends Controller
         $oldestUndone_difference = ($created->diff($now)->days < 1)
             ? 'today'
             : $created->diffForHumans($now);
-        
+        //Slowest and fastest dream done
+        $slowestDreamDone = 0;
+        foreach($doneDreams as $dream){
+            if($dream->delta_time > $slowestDreamDone){
+                $slowestDreamDone = $dream->delta_time;
+                $slowestDream = $dream;
+                $slowestDreamTime = Carbon::now()->subHours($slowestDreamDone)->diffForHumans();
+            }
+        }
+        $fastestDreamDone = $slowestDreamDone;
+        foreach($doneDreams as $dream){
+            if($dream->delta_time < $fastestDreamDone){
+                $fastestDreamDone = $dream->delta_time;
+                $fastestDream = $dream;
+            }
+        }
+
         return view('stats')
             ->with('kd_ratio', number_format(($dreams->where('done')->count()) / ($notDoneCount), 2, '.', ' '))
             ->with('done', $doneCount)
@@ -120,7 +136,8 @@ class DreamsController extends Controller
             ->with('dreams_create_by_month_ammount_array', $dreams_create_by_month_ammount_array)
             ->with('average', $average)
             ->with('oldestUndone', $oldestUndone)->with('oldestUndone_difference', $oldestUndone_difference)
-
+            ->with('slowestDream', $slowestDream)->with('slowestDreamTime', $slowestDreamTime)
+            ->with('fastestDream', $fastestDream)
             ;
 
 
