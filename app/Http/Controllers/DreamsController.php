@@ -81,7 +81,7 @@ class DreamsController extends Controller
         //Dream create by month
         $dreams_create_by_month = Dream::select('id', 'created_at')->get()
             ->groupBy(function ($date) {
-                return Carbon::parse($date->done)->format('m'); // grouping by months
+                return Carbon::parse($date->created_at)->format('m'); // grouping by months
             });
         $dreams_create_by_month_ammount = [];
         $dreams_create_by_month_ammount_array = [];
@@ -116,9 +116,9 @@ class DreamsController extends Controller
             if($dream->delta_time > $slowestDreamDone){
                 $slowestDreamDone = $dream->delta_time;
                 $slowestDream = $dream;
-                $slowestDreamTime = Carbon::now()->subHours($slowestDreamDone)->diffForHumans();
             }
         }
+
         $fastestDreamDone = $slowestDreamDone;
         foreach($doneDreams as $dream){
             if($dream->delta_time < $fastestDreamDone){
@@ -136,7 +136,7 @@ class DreamsController extends Controller
             ->with('dreams_create_by_month_ammount_array', $dreams_create_by_month_ammount_array)
             ->with('average', $average)
             ->with('oldestUndone', $oldestUndone)->with('oldestUndone_difference', $oldestUndone_difference)
-            ->with('slowestDream', $slowestDream)->with('slowestDreamTime', $slowestDreamTime)
+            ->with('slowestDream', $slowestDream)
             ->with('fastestDream', $fastestDream)
             ;
 
