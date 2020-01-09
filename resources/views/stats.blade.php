@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <th>The slowest dream come true + time from creation to its fulfilment</th>
-                <td>{{$slowestDream->title}} | {{$slowestDream->delta_time/24}} days</td>
+                <td>{{$slowestDream->title}} | {{number_format($slowestDream->delta_time/24,1,'.',' ')}} days</td>
             </tr>
         </table>
     </div>
