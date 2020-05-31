@@ -1,10 +1,26 @@
 <?php
+Auth::routes([
+    'register' => false,
+    'reset' => false
+]);
 
-Route::resource('/', 'DreamsController')->middleware('auth');
-Route::get('/update/{id}', 'DreamsController@update')->middleware('auth');
-Route::get('/destroy/{id}', 'DreamsController@destroy')->middleware('auth');
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/', function (){
+        return view('index');
+    })->name('home');
+    Route::resource('/dreams', 'DreamsController')->except(['index', 'create']);
+    Route::get('dreams/{dream}/toggle', 'DreamsController@toggle')->name('dreams.toggle');
+    Route::get('dreams/{dream}/delete', 'DreamsController@destroy')->name('dreams.destroy');
 
-Route::get('/stats', 'DreamsController@stats')->middleware('auth');
 
-Auth::routes();
+    Route::get('/profile', 'UsersController@profile')->name('profile');
+
+    Route::group(['middleware'=> ['role:admin']], function(){
+        Route::resource('/users', 'UsersController');
+    });
+
+});
+
+
+
 

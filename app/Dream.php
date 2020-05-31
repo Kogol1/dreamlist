@@ -23,6 +23,12 @@ class Dream extends Model
     //Timestamps
       public $timeStamps = true;
 
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'dream_user');
+    }
+
     public function getMonthAttribute()
     {
         return Carbon::parse($this->done)->format('m');

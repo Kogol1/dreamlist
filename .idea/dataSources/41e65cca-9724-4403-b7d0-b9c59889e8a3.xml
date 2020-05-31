@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="dreamlist@localhost">
-  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.15">
+  <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.17">
     <root id="1">
       <ServerVersion>10.3.16</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -14,7 +14,6 @@
     </schema>
     <schema id="4" parent="1" name="dreamlist">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>utf8_bin</Collation>
     </schema>
     <schema id="5" parent="1" name="drupal">
@@ -1350,154 +1349,5 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="342" parent="4" name="dreams">
-      <Collation>utf8mb4_unicode_ci</Collation>
-    </table>
-    <table id="343" parent="4" name="migrations">
-      <Collation>utf8mb4_unicode_ci</Collation>
-    </table>
-    <table id="344" parent="4" name="password_resets">
-      <Collation>utf8mb4_unicode_ci</Collation>
-    </table>
-    <table id="345" parent="4" name="users">
-      <Collation>utf8mb4_unicode_ci</Collation>
-    </table>
-    <column id="346" parent="342" name="id">
-      <Position>1</Position>
-      <DataType>bigint(20) unsigned|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="347" parent="342" name="title">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="348" parent="342" name="done">
-      <Position>3</Position>
-      <DataType>date|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="349" parent="342" name="created_at">
-      <Position>4</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="350" parent="342" name="updated_at">
-      <Position>5</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="351" parent="342" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="352" parent="343" name="id">
-      <Position>1</Position>
-      <DataType>int(10) unsigned|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="353" parent="343" name="migration">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="354" parent="343" name="batch">
-      <Position>3</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="355" parent="343" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="356" parent="344" name="email">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="357" parent="344" name="token">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="358" parent="344" name="created_at">
-      <Position>3</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="359" parent="344" name="password_resets_email_index">
-      <ColNames>email</ColNames>
-      <Type>btree</Type>
-    </index>
-    <column id="360" parent="345" name="id">
-      <Position>1</Position>
-      <DataType>bigint(20) unsigned|0s</DataType>
-      <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="361" parent="345" name="name">
-      <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="362" parent="345" name="email">
-      <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="363" parent="345" name="email_verified_at">
-      <Position>4</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="364" parent="345" name="password">
-      <Position>5</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="365" parent="345" name="remember_token">
-      <Position>6</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="366" parent="345" name="created_at">
-      <Position>7</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="367" parent="345" name="updated_at">
-      <Position>8</Position>
-      <DataType>timestamp|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="368" parent="345" name="users_email_unique">
-      <ColNames>email</ColNames>
-      <Unique>1</Unique>
-      <Type>btree</Type>
-    </index>
-    <key id="369" parent="345" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <key id="370" parent="345" name="users_email_unique">
-      <ColNames>email</ColNames>
-      <UnderlyingIndexName>users_email_unique</UnderlyingIndexName>
-    </key>
   </database-model>
 </dataSource>
