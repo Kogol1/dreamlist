@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Dream;
-use http\Client\Curl\User;
+use App\User;
 use Illuminate\Console\Command;
 
 class DreamConvert extends Command
@@ -40,7 +40,8 @@ class DreamConvert extends Command
     public function handle()
     {
         $user = User::find(1);
-        $dream = Dream::all();
+        $dream = Dream::where('id', '>', 0)->pluck('id')->toArray();
+     //   dd($dream);
         $user->dreams()->sync($dream);
     }
 }
